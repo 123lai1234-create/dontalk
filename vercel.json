@@ -1,10 +1,20 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "pnpm install --no-frozen-lockfile",
-  "buildCommand": "PORT=3000 BASE_PATH=/ pnpm --filter @workspace/portfolio run build",
+  "buildCommand": "pnpm --filter @workspace/portfolio run build",
   "outputDirectory": "artifacts/portfolio/dist/public",
   "trailingSlash": false,
+  "build": {
+    "env": {
+      "PORT": "3000",
+      "BASE_PATH": "/"
+    }
+  },
   "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://ddd-8888uhiuh.replit.app/api/:path*"
+    },
     {
       "source": "/:path*",
       "destination": "/index.html"
