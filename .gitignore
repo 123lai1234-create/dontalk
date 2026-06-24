@@ -47,3 +47,11 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# Attic / legacy archive — keep source files, ignore runtime artifacts
+attic/**/cache/
+attic/**/backup/
+attic/**/.cache/
+attic/**/*.json.cache
+attic/**/*.tmp
+attic/**/node_modules/

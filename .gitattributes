@@ -1,1 +1,4 @@
-.migration-backup/youtube_audio.webm filter=lfs diff=lfs merge=lfs -text
+# LFS pointers (intentionally empty — no active LFS-tracked paths in the
+# public artifacts/ or lib/ tree. Add patterns below if new large binaries
+# are introduced.)
+
