@@ -1,0 +1,19 @@
+- [Vite dep cache React version mismatch](vite-dep-cache-react-mismatch.md) — stale Vite deps cache can produce two React version hashes causing "Invalid hook call"
+- [BasePage inline script ordering](basepage-inline-script-order.md) — inline scripts must run after external scripts load (Chart.js dependency pattern)
+- [Stock-app operator auth](stock-operator-auth.md) — /stock operator/email/fan-out routes must be gated server-side via operatorOk(STOCK_OPERATOR_PASSWORD); reference's client-side password is cosmetic
+- [Dependency vuln scope](dependency-vuln-scope.md) — .migration-backup Go/Python/Astro findings are phantom (not deployed); real Node vulns fixed via pnpm.overrides
+- [CRLF in portfolio public/scripts](crlf-public-scripts.md) — these .js files use CRLF; multi-line edit-tool matches fail, use perl with \r?\n
+- [ripgrep output garbling](rg-output-garbling.md) — rg can silently substitute chars in matched lines; verify surprising grep results with the read tool
+- [Portfolio app-config API discovery](app-config-api-discovery.md) — resolveApiBase base must be origin root, probe /api/healthz; base=/api causes doubled /api/api/ 404s
+- [Deployment build vs root build](deploy-build-env.md) — deploy builds per-artifact via artifact.toml; root `pnpm run build` fails on dev-only sandbox + missing PORT/BASE_PATH but prod is fine
+- [Expo mobile prod BASE_PATH](expo-mobile-basepath-prod.md) — path-routed mobile artifact 404s at root unless services.env sets BASE_PATH to its mount prefix (router forwards full path; serve.js strips it)
+- [Vercel frontend + Replit backend split](vercel-replit-split-deploy.md) — donttalk.vercel.app serves static Vite build + rewrites /api/* to the always-on Replit VM; build needs PORT+BASE_PATH, pnpm pinned for catalog:
+- [Stock signal clone (/stock)](stock-clone-architecture.md) — operator auth closed-by-default, public flows rate-limited not auth-gated, yahoo-finance2 v3 must instantiate
+- [Static asset cache busting](static-asset-cache-busting.md) — non-hashed public/ CSS/JS get ?v=ASSET_VERSION (Vite build-time define) in BasePage to avoid stale cache on returning visitors
+- [BasePage scripts miss DOMContentLoaded](basepage-script-domcontentloaded.md) — SPA injects pageScripts after DOMContentLoaded fired; scripts need a readyState guard or init() never runs
+- [Portfolio global chrome scripts](portfolio-global-chrome-scripts.md) — Netlify-global scripts the migration dropped; what's safe to wire per-page, what to exclude, and that nav-appended elements leak across SPA routes
+- [SEC capex YTD reconstruction](sec-capex-ytd-reconstruction.md) — /ai_capex must difference cumulative-YTD SEC data into discrete quarters; aggregate YoY must use a single cohort
+- [Music lyric sync](music-lyric-sync.md) — bundled LRC timestamps are unreliable (over/undershoot, many untimed); player normalizes lyric times onto real audio duration on loadedmetadata
+- [index.css red-placeholder tokens](index-css-red-placeholder-tokens.md) — shadcn scaffold leaves `--x: red` placeholders; pages consuming var(--muted/--border/--accent) by name show red unless fixed at source
+- [btn-primary shimmer override](btn-primary-shimmer-override.md) — polish.css shimmer on .btn-primary background-image wiped each page's CTA color → ghost buttons; fixed globally by moving shimmer to ::after overlay
+- [/etf/api dead namespace](etf-api-prefix-dead-namespace.md) — stock-app pages must call /api/*, never /etf/api/*; app-router routes only /api to api-server, /etf/api falls to SPA HTML → "Unexpected token <"

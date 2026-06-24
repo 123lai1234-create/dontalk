@@ -1,0 +1,26 @@
+kind = "mobile"
+previewPath = "/portfolio-mobile/"
+title = "Portfolio Mobile"
+version = "1.0.0"
+id = "artifacts/portfolio-mobile"
+router = "path"
+
+[[integratedSkills]]
+name = "expo"
+version = "1.0.0"
+
+[[services]]
+name = "expo"
+paths = [ "/portfolio-mobile/" ]
+localPort = 8099
+
+[services.development]
+run = "pnpm --filter @workspace/portfolio-mobile run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/portfolio-mobile", "run", "build" ]
+run = "pnpm --filter @workspace/portfolio-mobile run serve"
+
+[services.env]
+PORT = "8099"
+BASE_PATH = "/portfolio-mobile"

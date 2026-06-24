@@ -1,0 +1,195 @@
+import BasePage from '../components/BasePage';
+
+// Extracted from index.astro - inline HTML content
+const HTML = `
+    <div data-site-nav></div>
+
+    <!-- Hero: compact, left-aligned, editorial -->
+    <section id="hero">
+        <div class="hero-content">
+            <div class="hero-badge"><span class="live-dot"></span>2026 · 開放洽談機會</div>
+            <h1 class="hero-name">站在研究與產品的交界，<span class="grad">打造跨域 AI 系統</span></h1>
+            <p class="hero-role">電資工程 × 生物醫學雙碩士 · AI 平台設計</p>
+            <p class="hero-bio">
+                把蛋白質語言模型、基因分析工具與互動介面，整合成可操作的研究平台——做有真實意義的跨域系統。
+            </p>
+            <div class="hero-links">
+                <a href="/about" class="btn btn-primary">認識我 →</a>
+                <a href="/works" class="btn btn-outline">全部作品</a>
+                <a href="/gene-ai" class="btn btn-ghost">基因 AI 平台 ↗</a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section id="selected">
+        <div class="sel-header reveal">
+            <span class="section-label">代表作品</span>
+        </div>
+        <div class="sel-list reveal">
+            <a href="/report" class="sel-item">
+                <div class="sel-left">
+                    <span class="sel-title">蛋白質 AI 設計系統</span>
+                    <span class="sel-desc">端到端 Pipeline：ESM-2 嵌入、Bayesian Optimization、ProteinMPNN 序列設計、REINFORCE RL 微調。</span>
+                </div>
+                <span class="sel-tag">Protein AI</span>
+                <span class="sel-arrow">→</span>
+            </a>
+            <a href="/gene-ai" class="sel-item">
+                <div class="sel-left">
+                    <span class="sel-title">基因 AI 分析平台</span>
+                    <span class="sel-desc">序列資料庫、RAG 文件搜尋、啟動子設計、CRISPR 導引排序、變異效應評估一站整合。</span>
+                </div>
+                <span class="sel-tag">Gene AI</span>
+                <span class="sel-arrow">→</span>
+            </a>
+            <a href="/ngs" class="sel-item">
+                <div class="sel-left">
+                    <span class="sel-title">NGS 次世代定序工作站</span>
+                    <span class="sel-desc">實驗設計計算器、定序深度估算、QC 到功能分析的完整結果圖表集。</span>
+                </div>
+                <span class="sel-tag">NGS</span>
+                <span class="sel-arrow">→</span>
+            </a>
+            <a href="/protein-mpnn" class="sel-item">
+                <div class="sel-left">
+                    <span class="sel-title">ProteinMPNN 互動工作台</span>
+                    <span class="sel-desc">直接操作序列設計、3D 結構預覽、突變著色與 Rosetta 簡化評分。</span>
+                </div>
+                <span class="sel-tag">Interactive</span>
+                <span class="sel-arrow">→</span>
+            </a>
+            <a href="/thesis" class="sel-item">
+                <div class="sel-left">
+                    <span class="sel-title">遺傳演算法量化研究</span>
+                    <span class="sel-desc">以 48 檔 ETF50 股票池重建 PPTS × GAPPTS，族群演化視覺化與逐檔回測比較。</span>
+                </div>
+                <span class="sel-tag">Research</span>
+                <span class="sel-arrow">→</span>
+            </a>
+        </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section id="about-strip">
+        <div class="strip-grid reveal">
+            <div class="strip-item">
+                <div class="strip-val">雙碩士</div>
+                <div class="strip-lbl">電資工程 × 生物醫學</div>
+            </div>
+            <div class="strip-item">
+                <div class="strip-val">2014–Now</div>
+                <div class="strip-lbl">研究 → 產品 → 平台</div>
+            </div>
+            <div class="strip-item">
+                <div class="strip-val">3 AI 平台</div>
+                <div class="strip-lbl">Protein · Gene · NGS</div>
+            </div>
+            <div class="strip-item strip-item-text">
+                <p>電資工程與生醫的雙碩士訓練，加上臨床與研究場景的第一線經驗，讓作品集裡每個系統都有真實問題的背景支撐。</p>
+                <a href="/about" class="strip-link">完整背景 →</a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section id="explore">
+        <div class="reveal">
+            <div class="section-label">深入探索</div>
+            <h2 class="section-title">各主題專頁</h2>
+            <p class="section-sub">每個主題都有獨立頁面，包含完整技術細節、互動圖表與操作介面。</p>
+        </div>
+        <div class="explore-groups reveal">
+            <div class="explore-group">
+                <div class="explore-group-head">
+                    <span class="explore-group-label">Protein</span>
+                    <span class="explore-group-title">蛋白質設計與分析</span>
+                    <span class="explore-group-sub">技術報告 + 可操作工作台兩頁互補</span>
+                </div>
+                <div class="explore-grid explore-grid-2">
+                    <a href="/report" class="explore-card ec-bio"><div class="explore-icon">🧬</div><h3>蛋白質 AI 專案報告</h3><p>端到端 Pipeline 架構、實驗結果圖表、核心演算法數學推導、程式碼庫結構一覽。</p><div class="explore-footer"><span class="explore-tag">Protein AI</span><span class="explore-arrow">→</span></div></a>
+                    <a href="/protein-mpnn" class="explore-card ec-bio"><div class="explore-icon">🧪</div><h3>ProteinMPNN 互動展示</h3><p>獨立工作台頁面，直接操作序列設計、3D 結構預覽、突變著色與 Rosetta 簡化評分。</p><div class="explore-footer"><span class="explore-tag">Interactive</span><span class="explore-arrow">→</span></div></a>
+                </div>
+            </div>
+            <div class="explore-group">
+                <div class="explore-group-head">
+                    <span class="explore-group-label">Genomics</span>
+                    <span class="explore-group-title">基因 AI 與 NGS 定序</span>
+                    <span class="explore-group-sub">從序列快取到實驗設計的完整工作流</span>
+                </div>
+                <div class="explore-grid explore-grid-2">
+                    <a href="/gene-ai" class="explore-card ec-gene"><div class="explore-icon">🔬</div><h3>基因 AI 平台</h3><p>序列資料庫、知識庫、RAG 文件搜尋、啟動子設計、CRISPR 導引排序、變異效應評估。</p><div class="explore-footer"><span class="explore-tag">Gene AI</span><span class="explore-arrow">→</span></div></a>
+                    <a href="/ngs" class="explore-card ec-gene"><div class="explore-icon">📊</div><h3>NGS 次世代定序</h3><p>實驗設計計算器、定序深度估算、QC 到功能分析的完整結果圖表集。</p><div class="explore-footer"><span class="explore-tag">NGS</span><span class="explore-arrow">→</span></div></a>
+                </div>
+            </div>
+            <div class="explore-group">
+                <div class="explore-group-head">
+                    <span class="explore-group-label">Other</span>
+                    <span class="explore-group-title">其他資源</span>
+                    <span class="explore-group-sub">面試準備、作品集總覽、研究論文</span>
+                </div>
+                <div class="explore-grid explore-grid-3">
+                    <a href="/interview" class="explore-card ec-study"><div class="explore-icon">🎯</div><h3>面試準備手冊</h3><p>模擬面試問答、數學推導筆記、Mini Project 完整程式碼、六週衝刺計劃。</p><div class="explore-footer"><span class="explore-tag">Study</span><span class="explore-arrow">→</span></div></a>
+                    <a href="/works" class="explore-card ec-study"><div class="explore-icon">💼</div><h3>作品總覽</h3><p>所有專案卡片篩選、即時 API 統計、跨域作品集一覽。</p><div class="explore-footer"><span class="explore-tag">Portfolio</span><span class="explore-arrow">→</span></div></a>
+                    <a href="/blog" class="explore-card ec-research"><div class="explore-icon">📖</div><h3>技術文章</h3><p>蛋白質 AI、NGS 定序、量化交易等研究筆記與技術解析。</p><div class="explore-footer"><span class="explore-tag">Blog</span><span class="explore-arrow">→</span></div></a>
+                    <a href="/thesis" class="explore-card ec-research"><div class="explore-icon">📝</div><h3>論文 · 遺傳演算法</h3><p>以 48 檔 ETF50 股票池重建 PPTS × GAPPTS，逐檔觀察族群演化、逐檔回測與方法比較。</p><div class="explore-footer"><span class="explore-tag">Research</span><span class="explore-arrow">→</span></div></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section id="github-stats" style="max-width:800px;margin:0 auto;padding:40px 24px">
+        <div class="section-label">Live · GitHub</div>
+        <h2 class="section-title">開源活動</h2>
+        <div id="gh-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:24px">
+            <div class="gh-stat-card" id="gh-repos"><div class="gh-val">—</div><div class="gh-lbl">Public Repos</div></div>
+            <div class="gh-stat-card" id="gh-stars"><div class="gh-val">—</div><div class="gh-lbl">Total Stars</div></div>
+            <div class="gh-stat-card" id="gh-followers"><div class="gh-val">—</div><div class="gh-lbl">Followers</div></div>
+            <div class="gh-stat-card" id="gh-updated"><div class="gh-val" style="font-size:.85rem">—</div><div class="gh-lbl">最近推送</div></div>
+        </div>
+        <div id="gh-recent" style="margin-top:20px;display:flex;flex-direction:column;gap:8px"></div>
+    </section>
+
+    <hr class="divider" />
+
+    <section id="esm-demo" style="max-width:800px;margin:0 auto;padding:48px 24px">
+        <div class="section-label">Live Demo · ESM-2</div>
+        <h2 class="section-title">蛋白質序列相似度分析</h2>
+        <p class="section-sub" style="margin-bottom:28px">輸入兩段胺基酸序列，透過 ESM-2（8M）embedding 計算語意相似度。由 <a href="https://huggingface.co/spaces/Donttalk123/web" target="_blank" rel="noreferrer" style="color:var(--accent)">HuggingFace Space</a> 即時推論。</p>
+        <div style="display:flex;flex-direction:column;gap:12px">
+            <label style="font-size:.85rem;color:var(--muted)">序列 A</label>
+            <input id="esm-seq-a" type="text" value="MKTIIALSYIFCLVFA" placeholder="MKTIIALSYIFCLVFA"
+                style="width:100%;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:monospace;font-size:.9rem" />
+            <label style="font-size:.85rem;color:var(--muted)">序列 B</label>
+            <input id="esm-seq-b" type="text" value="MKTIIALSYIFCLVFAFF" placeholder="MKTIIALSYIFCLVFAFF"
+                style="width:100%;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:monospace;font-size:.9rem" />
+            <button id="esm-run-btn"
+                style="align-self:flex-start;padding:10px 28px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.95rem">
+                計算相似度
+            </button>
+        </div>
+        <div id="esm-result" style="margin-top:20px;min-height:60px"></div>
+    </section>
+
+    <hr class="divider" />
+    <div data-site-footer></div>
+    <button class="scroll-top" aria-label="返回頂部">↑</button>
+    <div id="tsparticles"></div>
+`;
+
+export default function IndexPage() {
+  return (
+    <BasePage
+      title="Portfolio — 工程 × 生醫 × AI 平台"
+      bodyPage="index"
+      pageStyles={['/styles/index.css', '/styles/index-live.css', '/styles/index-content.css']}
+      pageScripts={['/scripts/chart.umd.js', '/scripts/app-config.js', '/scripts/index-ui.js', '/scripts/index-live.js', '/scripts/index-charts.js']}
+      html={HTML}
+    />
+  );
+}

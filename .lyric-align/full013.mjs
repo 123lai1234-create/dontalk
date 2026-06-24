@@ -1,0 +1,15 @@
+import { GoogleGenAI } from "@google/genai";
+import fs from "fs";
+import { execSync } from "child_process";
+const ai=new GoogleGenAI({apiKey:process.env.AI_INTEGRATIONS_GEMINI_API_KEY,httpOptions:{apiVersion:"",baseUrl:process.env.AI_INTEGRATIONS_GEMINI_BASE_URL}});
+const url="https://donttalk.netlify.app/music/track_013.mp3";
+execSync(`curl -s -f -m 120 -o .lyric-align/tmp/full013.mp3 "${url}"`);
+execSync(`ffmpeg -y -i .lyric-align/tmp/full013.mp3 -ac 1 -b:a 32k .lyric-align/tmp/full013_s.mp3 2>/dev/null`,{timeout:90000});
+const b64=fs.readFileSync(".lyric-align/tmp/full013_s.mp3").toString("base64");
+const prompt=`這是一首完整的中文歌曲音檔。請完整聽寫出所有被唱出來的歌詞，每句一行，照原文不要翻譯、不要加時間戳。只回傳 JSON：{"lines":["...","..."]}`;
+const callP=ai.models.generateContent({model:"gemini-2.5-flash",contents:[{role:"user",parts:[{text:prompt},{inlineData:{mimeType:"audio/mp3",data:b64}}]}],config:{responseMimeType:"application/json",temperature:0}});
+const toP=new Promise((_,rej)=>setTimeout(()=>rej(new Error("timeout60")),60000));
+const resp=await Promise.race([callP,toP]);
+const j=JSON.parse(resp.text);
+fs.writeFileSync(".lyric-align/full013.json",JSON.stringify(j,null,2));
+console.log((j.lines||[]).join("\n"));

@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "caqE40wD9QOoGsVFF6ddR"
+uri = "file://artifacts/portfolio-mobile/assets/images/icon.png"
+type = "image"
+title = "donttalk portfolio mobile icon"
+
+[[generated]]
+id = "GqMmD4Hd48UweE9aaVguS"
+uri = "file://artifacts/portfolio/public/stem-cell/if_ang0_50k_cd31.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "W0Gt7ERYTzp4oNLtTZ89o"
+uri = "file://artifacts/portfolio/public/stem-cell/if_ang0_100k_cd31.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "fEH44O9zmVFehdgp05oZA"
+uri = "file://artifacts/portfolio/public/stem-cell/if_ang0_100k_dapi.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "syfrv4khbrV1NG0wDKf2t"
+uri = "file://artifacts/portfolio/public/stem-cell/if_ang1_50k_nestin.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "DluQCFWcBcKm1537QRKAx"
+uri = "file://artifacts/portfolio/public/stem-cell/if_ang1_100k_nestin.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Xg48505OWqXUleAprHK2q"
+uri = "file://artifacts/portfolio/public/stem-cell/if_ang1_250k_nestin.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "s82rJWNtuaHy8BStOR3Y-"
+uri = "file://artifacts/portfolio/public/stem-cell/if_ang10_50k_nestin.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "fGPGBb_f5EayaYzPmo7bX"
+uri = "file://artifacts/portfolio/public/stem-cell/if_ang10_100k_cd31.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "0OFbUAU2rTtIBDiGOA3lz"
+uri = "file://artifacts/portfolio/public/stem-cell/if_ang10_250k_nestin.png"
+type = "image"
+title = "generated_image"

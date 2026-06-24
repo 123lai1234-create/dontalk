@@ -1,0 +1,334 @@
+{
+  "tracks": [
+    {
+      "name": "兄弟本色",
+      "audio": "https://donttalk.netlify.app/music/track_001.mp3",
+      "lyrics": "/music/lyrics_035.txt",
+      "lang": "TW",
+      "style": "嘻哈",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "不服",
+      "audio": "https://donttalk.netlify.app/music/track_002.mp3",
+      "lyrics": "/music/lyrics_003.txt",
+      "lang": "TW",
+      "style": "流行",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "不服輸",
+      "audio": "https://donttalk.netlify.app/music/track_003.mp3",
+      "lyrics": "/music/lyrics_002.txt",
+      "lang": "TW",
+      "style": "流行",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "再站起來",
+      "audio": "https://donttalk.netlify.app/music/track_004.mp3",
+      "lyrics": "/music/lyrics_004.txt",
+      "lang": "TW",
+      "style": "搖滾",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "水泥森林",
+      "audio": "https://donttalk.netlify.app/music/track_005.mp3",
+      "lyrics": "/music/lyrics_005.txt",
+      "lang": "TW",
+      "style": "搖滾",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "老家的巷子",
+      "audio": "https://donttalk.netlify.app/music/track_006.mp3",
+      "lyrics": "/music/lyrics_037.txt",
+      "lang": "TW",
+      "style": "民謠",
+      "artist": "獨立歌手",
+      "gender": "F",
+      "album": "原創專輯"
+    },
+    {
+      "name": "趁現在",
+      "audio": "https://donttalk.netlify.app/music/track_007.mp3",
+      "lyrics": "/music/lyrics_008.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "雨夜的城市",
+      "audio": "https://donttalk.netlify.app/music/track_008.mp3",
+      "lyrics": "/music/lyrics_038.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "F",
+      "album": "原創專輯"
+    },
+    {
+      "name": "遇見你的那天　世界安靜了",
+      "audio": "https://donttalk.netlify.app/music/track_010.mp3",
+      "lyrics": "/music/lyrics_012.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "三十歲的懸賞令",
+      "audio": "https://donttalk.netlify.app/music/track_011.mp3",
+      "lyrics": "/music/lyrics_011.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "給爸媽的電話",
+      "audio": "https://donttalk.netlify.app/music/track_012.mp3",
+      "lyrics": "/music/lyrics_041.txt",
+      "lang": "TW",
+      "style": "嘻哈",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "我一個人也很好",
+      "audio": "https://donttalk.netlify.app/music/track_013.mp3",
+      "lyrics": "/music/lyrics_066.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "機場的最後一夜",
+      "audio": "https://donttalk.netlify.app/music/track_014.mp3",
+      "lyrics": "/music/lyrics_014.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "十年後的重逢",
+      "audio": "https://donttalk.netlify.app/music/track_015.mp3",
+      "lyrics": "/music/lyrics_015.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "城市的夜",
+      "audio": "https://donttalk.netlify.app/music/track_017.mp3",
+      "lyrics": "/music/lyrics_017.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "F",
+      "album": "原創專輯"
+    },
+    {
+      "name": "如果有一天",
+      "audio": "https://donttalk.netlify.app/music/track_018.mp3",
+      "lyrics": "/music/lyrics_018.txt",
+      "lang": "TW",
+      "style": "流行",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "故鄉的雲",
+      "audio": "https://donttalk.netlify.app/music/track_019.mp3",
+      "lyrics": "/music/lyrics_045.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "時光膠囊",
+      "audio": "https://donttalk.netlify.app/music/track_020.mp3",
+      "lyrics": "/music/lyrics_046.txt",
+      "lang": "TW",
+      "style": "民謠",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "風箏的故鄉",
+      "audio": "https://donttalk.netlify.app/music/track_021.mp3",
+      "lyrics": "/music/lyrics_021.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "遇見你之前",
+      "audio": "https://donttalk.netlify.app/music/track_022.mp3",
+      "lyrics": "/music/lyrics_048.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "等天亮",
+      "audio": "https://donttalk.netlify.app/music/track_023.mp3",
+      "lyrics": "/music/lyrics_023.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "F",
+      "album": "原創專輯"
+    },
+    {
+      "name": "Late Night City",
+      "audio": "https://donttalk.netlify.app/music/track_025.mp3",
+      "lyrics": "/music/lyrics_025.txt",
+      "lang": "TW",
+      "style": "抒情",
+      "artist": "獨立歌手",
+      "gender": "F",
+      "album": "原創專輯"
+    },
+    {
+      "name": "Writer's Soul",
+      "audio": "https://donttalk.netlify.app/music/track_026.mp3",
+      "lyrics": "/music/lyrics_051.txt",
+      "lang": "EN",
+      "style": "Lo-fi",
+      "artist": "Independent Artist",
+      "gender": "M",
+      "album": "Original Album"
+    },
+    {
+      "name": "Dive Bar Stage",
+      "audio": "https://donttalk.netlify.app/music/track_027.mp3",
+      "lyrics": "/music/lyrics_027.txt",
+      "lang": "EN",
+      "style": "Lo-fi",
+      "artist": "Independent Artist",
+      "gender": "F",
+      "album": "Original Album"
+    },
+    {
+      "name": "Tokyo Rain",
+      "audio": "https://donttalk.netlify.app/music/track_028.mp3",
+      "lyrics": "/music/lyrics_028.txt",
+      "lang": "EN",
+      "style": "Lo-fi",
+      "artist": "Independent Artist",
+      "gender": "M",
+      "album": "Original Album"
+    },
+    {
+      "name": "セピアに眠る写真たち",
+      "audio": "https://donttalk.netlify.app/music/track_029.mp3",
+      "lyrics": "/music/lyrics_029.txt",
+      "lang": "JP",
+      "style": "J-Pop",
+      "artist": "Independent Artist",
+      "gender": "F",
+      "album": "オリジナルアルバム"
+    },
+    {
+      "name": "富士の影",
+      "audio": "https://donttalk.netlify.app/music/track_030.mp3",
+      "lyrics": "/music/lyrics_057.txt",
+      "lang": "JP",
+      "style": "J-Pop",
+      "artist": "Independent Artist",
+      "gender": "F",
+      "album": "オリジナルアルバム"
+    },
+    {
+      "name": "たこ焼きコメディアン",
+      "audio": "https://donttalk.netlify.app/music/track_031.mp3",
+      "lyrics": "/music/lyrics_059.txt",
+      "lang": "JP",
+      "style": "J-Pop",
+      "artist": "Independent Artist",
+      "gender": "M",
+      "album": "オリジナルアルバム"
+    },
+    {
+      "name": "자정의 지하철",
+      "audio": "https://donttalk.netlify.app/music/track_032.mp3",
+      "lyrics": "/music/lyrics_032.txt",
+      "lang": "JP",
+      "style": "J-Pop",
+      "artist": "Independent Artist",
+      "gender": "M",
+      "album": "オリジナルアルバム"
+    },
+    {
+      "name": "따뜻한 시장의 봄날",
+      "audio": "https://donttalk.netlify.app/music/track_033.mp3",
+      "lyrics": "/music/lyrics_033.txt",
+      "lang": "KR",
+      "style": "K-Pop",
+      "artist": "Independent Artist",
+      "gender": "M",
+      "album": "오리지널 앨범"
+    },
+    {
+      "name": "이태원거리",
+      "audio": "https://donttalk.netlify.app/music/track_034.mp3",
+      "lyrics": "/music/lyrics_034.txt",
+      "lang": "KR",
+      "style": "K-Pop",
+      "artist": "Independent Artist",
+      "gender": "F",
+      "album": "오리지널 앨범"
+    },
+    {
+      "name": "那個回不去的夏天",
+      "audio": "https://donttalk.netlify.app/music/track_039.mp3",
+      "lyrics": "/music/lyrics_039.txt",
+      "lang": "TW",
+      "style": "搖滾",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    },
+    {
+      "name": "不死的腳",
+      "audio": "https://donttalk.netlify.app/music/track_063.mp3",
+      "lyrics": "/music/lyrics_063.txt",
+      "lang": "TW",
+      "style": "搖滾",
+      "artist": "獨立歌手",
+      "gender": "M",
+      "album": "原創專輯"
+    }
+  ]
+}
