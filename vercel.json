@@ -16,6 +16,10 @@
       "destination": "https://ddd-8888uhiuh.replit.app/api/:path*"
     },
     {
+      "source": "/f1/:path*",
+      "destination": "/f1/index.html"
+    },
+    {
       "source": "/:path*",
       "destination": "/index.html"
     }

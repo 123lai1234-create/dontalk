@@ -4,6 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>台股均線買賣訊號系統</title>
+  <script>
+    // 國際財經跑馬燈速度：可用 ?duration=N 覆寫（單位秒，範圍 5–600，預設 80）
+    // 手機版自動取一半（最少 15s）。改這裡不會影響 production：直接用 query string 試。
+    (function(){
+      try{
+        var p = new URLSearchParams(location.search);
+        var d = parseInt(p.get('duration'), 10);
+        if (isNaN(d)) d = 80;
+        if (d < 5) d = 5;
+        if (d > 600) d = 600;
+        var md = Math.max(15, Math.round(d / 2));
+        var root = document.documentElement;
+        root.style.setProperty('--ticker-duration', d + 's');
+        root.style.setProperty('--ticker-mobile-duration', md + 's');
+      }catch(_){}
+    })();
+  </script>
   <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="static/favicon.svg">
@@ -1252,7 +1269,7 @@
     }
     .macro-ticker-track{
       display:inline-flex;gap:42px;white-space:nowrap;
-      animation:macroScroll 80s linear infinite;
+      animation:macroScroll var(--ticker-duration, 80s) linear infinite;
       padding-right:42px;
     }
     .macro-ticker-track:hover{animation-play-state:paused}
@@ -1299,7 +1316,7 @@
     .macro-ticker[data-collapsed="1"] .macro-ticker-head{padding:4px 12px}
     @media(max-width:768px){
       .macro-ticker-more{display:none}
-      .macro-ticker-track{animation-duration:30s}
+      .macro-ticker-track{animation-duration:var(--ticker-mobile-duration, 30s)}
     }
   </style>
   <script>
