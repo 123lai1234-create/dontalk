@@ -23,6 +23,10 @@ publicDir = "artifacts/portfolio/dist/public"
 serve = "static"
 
 [[services.production.rewrites]]
+from = "/f1/*"
+to = "/f1/index.html"
+
+[[services.production.rewrites]]
 from = "/*"
 to = "/index.html"
 
