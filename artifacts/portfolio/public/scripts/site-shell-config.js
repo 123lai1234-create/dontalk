@@ -7,7 +7,7 @@ window.SITE_SHELL_CONFIG = (function () {
         { href: '/firmware', label: '🔌 韌體' },
         { href: '/stem-cell', label: '🧫 幹細胞' },
         { href: '/protein-mpnn', label: 'ProteinMPNN' },
-        { href: '/music', label: '🎵 音樂' },
+        { href: 'https://dontalk.vercel.app/music', label: '🎵 音樂' },
         { href: 'https://dontalk.vercel.app/stock', label: '📈 股票' },
         { href: '/interactive-showcase', label: '⚡ Tech Lab', classes: 'nav-cta' }
     ];
@@ -20,7 +20,7 @@ window.SITE_SHELL_CONFIG = (function () {
         { href: '/gene-ai', label: '基因 AI' },
         { href: '/report', label: '專案報告' },
         { href: '/protein-mpnn', label: 'ProteinMPNN' },
-        { href: '/music', label: '🎵 音樂播放' },
+        { href: 'https://dontalk.vercel.app/music', label: '🎵 音樂播放' },
         { href: 'https://dontalk.vercel.app/stock', label: '📈 股票' },
         { href: '/interactive-showcase', label: '⚡ 互動技術展示館' },
         { href: '/firmware', label: '🔌 韌體 MCU' },
@@ -35,7 +35,7 @@ window.SITE_SHELL_CONFIG = (function () {
         { href: '/gene-ai', label: '基因 AI' },
         { href: '/ngs', label: 'NGS 定序' },
         { href: '/protein-mpnn', label: 'ProteinMPNN' },
-        { href: '/music', label: '🎵 音樂播放' },
+        { href: 'https://dontalk.vercel.app/music', label: '🎵 音樂播放' },
         { href: '/report', label: '專案報告' },
         { href: '/firmware', label: '韌體' },
         { href: '/stem-cell', label: '幹細胞研究' },
