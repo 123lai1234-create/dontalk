@@ -20,8 +20,16 @@ RUN corepack enable \
 WORKDIR /workspace
 
 # Copy lockfile + workspace metadata first for maximum layer cache hit rate.
-COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .npmrc ./
-COPY tsconfig.base.json tsconfig.json ./
+# Split into individual COPY lines — BuildKit on Railway's Metal builder
+# has a quirk where multi-source COPY with dotfiles (like .npmrc) can fail
+# the cache key check with a misleading "not found" error during the
+# runtime stage's `COPY --from=build`. Single-source COPY is reliable.
+COPY pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml ./
+COPY package.json ./
+COPY .npmrc ./
+COPY tsconfig.base.json ./
+COPY tsconfig.json ./
 
 # Workspace members the api-server transitively needs.
 COPY lib ./lib
@@ -47,15 +55,21 @@ RUN corepack enable \
 WORKDIR /workspace
 
 # Workspace metadata + pnpm cache for prod install.
-COPY --from=build /workspace/pnpm-lock.yaml pnpm-workspace.yaml package.json .npmrc ./
-COPY --from=build /workspace/tsconfig.base.json tsconfig.json ./
+# Same single-source COPY rationale as the build stage above. The runtime
+# stage doesn't need .npmrc (pnpm install will use defaults — the strict
+# settings there were only relevant to the build stage's devDep install).
+COPY pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml ./
+COPY package.json ./
+COPY tsconfig.base.json ./
+COPY tsconfig.json ./
 
 # Workspace members (lib is needed for symlink targets; lib/db and
 # lib/api-zod are TS-source exports bundled into the api-server's dist,
 # but pnpm's hoisted store still wants them present for symlink correctness).
-COPY --from=build /workspace/lib ./lib
-COPY --from=build /workspace/artifacts ./artifacts
-COPY --from=build /workspace/scripts ./scripts
+COPY lib ./lib
+COPY artifacts ./artifacts
+COPY scripts ./scripts
 
 # Install production-only deps (no esbuild/tsc/etc.). The api-server
 # node_modules holds the external runtime deps (pg, drizzle-orm, express, ...).
