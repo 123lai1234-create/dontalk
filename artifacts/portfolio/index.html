@@ -20,6 +20,20 @@
   </head>
   <body>
     <div id="root"></div>
+    <!--
+      Inject the API base URL before any user scripts run.
+      Replit Reserved VM was deprecated in 2025; the new backend is on Railway
+      at https://api-server-production-676d.up.railway.app. public/scripts/app-config.js
+      reads `window.APP_CONFIG.API_BASE_URL` as the first candidate and probes
+      `${candidate}/api/healthz`, so this single line bypasses the Vercel
+      rewrite (which is currently broken on this monorepo) and avoids the
+      need to push the URL through every page's call site.
+    -->
+    <script>
+      window.APP_CONFIG = Object.assign({}, window.APP_CONFIG, {
+        API_BASE_URL: 'https://api-server-production-676d.up.railway.app',
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
