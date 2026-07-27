@@ -1,0 +1,59 @@
+# Files / directories that should never reach the Docker build context.
+# Keeps the build context small and prevents secret leakage into image layers.
+
+# Dependencies (will be installed inside the image)
+node_modules
+**/node_modules
+.pnpm-store
+
+# Build outputs that are either produced inside the image or not needed
+artifacts/**/dist
+artifacts/**/.vite
+artifacts/**/.cache
+artifacts/portfolio/public
+artifacts/portfolio-mobile/**
+artifacts/mockup-sandbox/**
+
+# Tests / coverage / scratch
+coverage
+**/*.test.ts
+**/*.spec.ts
+**/__tests__
+.attic
+attached_assets
+tmp
+
+# Local state, secrets, env files
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# VCS / IDE
+.git
+.gitignore
+.gitattributes
+.github
+.idea
+.vscode
+.cursor
+
+# Replit / Vercel deployment glue (not relevant to the api-server image)
+.replit
+.replit-artifact
+.replitignore
+.replit.nix
+.vercel
+attached_assets
+attic
+
+# OS noise
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

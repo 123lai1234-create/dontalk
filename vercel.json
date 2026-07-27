@@ -12,8 +12,9 @@
   },
   "rewrites": [
     {
+      "_comment": "API proxy → Railway-hosted api-server. Replace YOUR-RAILWAY-APP.up.railway.app with the public domain Railway assigns to your service (Settings → Networking → Generate Domain, then drop the scheme). The previous Replit Reserved VM (ddd-8888uhiuh.replit.app) was deprecated by Replit and is now offline — see Dockerfile + railway.toml + artifacts/api-server/.env.example for the new deployment.",
       "source": "/api/:path*",
-      "destination": "https://ddd-8888uhiuh.replit.app/api/:path*"
+      "destination": "https://YOUR-RAILWAY-APP.up.railway.app/api/:path*"
     },
     {
       "source": "/f1/:path*",

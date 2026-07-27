@@ -1,0 +1,39 @@
+# ----------------------------------------------------------------------------
+# Railway service configuration for the dontalk api-server.
+#
+# This file is committed at the monorepo root and tells Railway to:
+#   1. Build using the Dockerfile at the repo root (pnpm workspace aware).
+#   2. Run the CMD declared in the Dockerfile (no override here, so the
+#      Dockerfile stays the single source of truth for the run command).
+#   3. Probe /api/healthz for liveness — Railway restarts the container
+#      automatically if the probe fails.
+#
+# Companion files:
+#   - Dockerfile          — image build (multi-stage pnpm)
+#   - .dockerignore       — keeps the build context lean
+#   - artifacts/api-server/.env.example  — every env var the app reads
+# ----------------------------------------------------------------------------
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "./Dockerfile"
+
+[deploy]
+# Image runs the api-server (CMD set in Dockerfile). Don't override startCommand
+# here — letting the Dockerfile own it means a one-line `CMD` change is enough
+# to update the run command in every environment.
+
+# Health probe. The api-server exposes GET /api/healthz which returns 200
+# {"status":"ok"} (see artifacts/api-server/src/routes/health.ts). Railway
+# will only mark the deployment successful after this returns 200.
+healthcheckPath = "/api/healthz"
+healthcheckTimeout = 30
+
+# Restart policy. Crash-loops should make noise; transient blips shouldn't
+# trigger a full redeploy from GitHub.
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5
+
+# Hard cap on stale connections (Railway's reverse proxy closes idle TCP
+# after ~5 min — drain gracefully so in-flight requests finish).
+GRACEFUL_SHUTDOWN_TIMEOUT_SECONDS = "30"
