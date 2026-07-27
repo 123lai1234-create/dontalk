@@ -36,4 +36,5 @@ restartPolicyMaxRetries = 5
 
 # Hard cap on stale connections (Railway's reverse proxy closes idle TCP
 # after ~5 min — drain gracefully so in-flight requests finish).
-GRACEFUL_SHUTDOWN_TIMEOUT_SECONDS = "30"
+# (Set via container env if needed; not all fields are honored in railway.toml
+#  for every deploy — this is informational for future tuning.)
