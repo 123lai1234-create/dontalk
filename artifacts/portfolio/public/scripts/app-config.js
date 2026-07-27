@@ -16,7 +16,13 @@
     const host = window.location.hostname;
     const defaultPortfolioServiceNames = ['donttalk'];
     const defaultApiServiceNames = ['donttalk-api'];
-    const defaultApiCandidates = [];
+    // Backend moved from Replit Reserved VM (deprecated) to Railway in 2026-07.
+    // The candidate list is tried in order: each entry is fetched against
+    // /api/healthz and the first one that returns {"status":"ok"} wins.
+    // See vercel.json / Dockerfile / railway.toml for the deployment setup.
+    const defaultApiCandidates = [
+        'https://api-server-production-676d.up.railway.app',
+    ];
     const resolvedPortfolioServiceNames = normalizeList(existingConfig.PORTFOLIO_SERVICE_NAMES).length
         ? normalizeList(existingConfig.PORTFOLIO_SERVICE_NAMES)
         : defaultPortfolioServiceNames;
