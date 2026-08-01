@@ -1,6 +1,7 @@
 export const config = { runtime: "edge" };
 
-const BACKEND = "https://ddd-8888uhiuh.replit.app";
+// 7/2026: Replit VM (deprecated) → Railway. See vercel.json rewrites & DEPLOY_RAILWAY.md.
+const BACKEND = "https://api-server-production-676d.up.railway.app";
 
 export default async function handler(req) {
   const incoming = new URL(req.url);
