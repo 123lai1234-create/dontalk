@@ -1511,7 +1511,7 @@
 
 
     <div id="chart-container" style="position:relative">
-      <div id="chartLegend" style="position:absolute;top:8px;left:12px;z-index:10;
+      <div id="chartLegend" style="position:absolute;top:8px;left:12px;z-index:10;pointer-events:none;
            font-size:12px;line-height:1.5;color:#e0e0e0;
            background:rgba(15,15,35,0.85);border:1px solid #2a2a5a;
            padding:6px 10px;border-radius:4px;pointer-events:none;
@@ -2255,6 +2255,20 @@ function _mergeAndSetMarkers(){
   if (!candleSeries) return;
   var ev = _showEventMarkers ? (_eventMarkers||[]) : [];
   var all = (_baseMarkers||[]).concat(ev).concat(_macdDivMarkers||[]);
+  // Only fields the chart library understands; anything else (e.g. an
+  // object-shaped text or close/ma fields from the API) is stripped here
+  // instead of being rendered over the candles.
+  all = all.filter(function(m){ return m && m.time != null; }).map(function(m){
+    return {
+      time: m.time,
+      position: m.position || "aboveBar",
+      color: m.color || "#ffeb3b",
+      shape: m.shape || "circle",
+      text: typeof m.text === "string" ? m.text : "",
+      size: m.size,
+      id: m.id
+    };
+  });
   all.sort(function(a,b){ return (a.time<b.time)?-1:((a.time>b.time)?1:0); });
   try { candleSeries.setMarkers(all); } catch(e) { console.warn("setMarkers 失敗:", e); }
 }
@@ -2757,10 +2771,10 @@ function renderIndexSummary(s, lt) {
     var content = document.getElementById("indexDipAlertContent");
 
     // ★ 暫時加這裡，看完就刪掉
-    console.log("today_vol raw:", dipSignal.today_vol);
-    console.log("today_vol_yi:", dipSignal.today_vol_yi);
-    console.log("max_vol_7d raw:", dipSignal.max_vol_7d);
-    console.log("max_vol_7d_yi:", dipSignal.max_vol_7d_yi);
+    // debug log removed (was: console.log)
+    // debug log removed (was: console.log)
+    // debug log removed (was: console.log)
+    // debug log removed (was: console.log)
 
     // 若非加權指數或無資料，隱藏
     if (!dipSignal || Object.keys(dipSignal).length === 0) {
@@ -3706,8 +3720,8 @@ function closeAddStockModal() {
     var rawCode = input.value.trim();
     var code = rawCode.toUpperCase();
 
-    console.log("=== confirmAddStock 開始 ===");
-    console.log("輸入值:", rawCode, "→ 轉大寫:", code);
+    // debug log removed (was: console.log)
+    // debug log removed (was: console.log)
 
     if (!code) {
       hint.textContent = "請輸入股票代碼或名稱";
@@ -3724,11 +3738,11 @@ function closeAddStockModal() {
         : indSel.value;
     }
 
-    console.log("準備呼叫 promptPasswordThen...");
+    // debug log removed (was: console.log)
 
     promptPasswordThen(function(password) {
-      console.log("密碼已輸入，長度:", password ? password.length : 0);
-      console.log("準備發送 API 請求...");
+      // debug log removed (was: console.log)
+      // debug log removed (was: console.log)
 
       btn.disabled = true;
       hint.textContent = "⏳ 驗證中，請稍候...";
@@ -3739,8 +3753,8 @@ function closeAddStockModal() {
         ? "/api/stocks/add"
         : "/api/stocks/add";
 
-      console.log("API URL:", apiUrl);
-      console.log("送出資料:", { code: code, password: "***" });
+      // debug log removed (was: console.log)
+      // debug log removed (was: console.log)
 
       fetch(apiUrl, {
         method: "POST",
@@ -3748,9 +3762,9 @@ function closeAddStockModal() {
         body: JSON.stringify({ code: code, password: password, industry: industry })
       })
       .then(function(r) {
-        console.log("收到回應！HTTP 狀態碼:", r.status, r.statusText);
+        // debug log removed (was: console.log)
         return r.json().then(function(d) {
-          console.log("回應 JSON:", d);
+          // debug log removed (was: console.log)
           return { status: r.status, data: d };
         });
       })
@@ -3758,10 +3772,10 @@ function closeAddStockModal() {
         var status = result.status;
         var d = result.data;
 
-        console.log("處理結果 - status:", status, "d.ok:", d.ok, "d.error:", d.error);
+        // debug log removed (was: console.log)
 
         if (status === 403 || (d && d.need_password)) {
-          console.log("❌ 密碼錯誤");
+          // debug log removed (was: console.log)
           hint.textContent = "❌ 密碼錯誤，請重試";
           hint.className = "add-stock-hint error";
           btn.disabled = false;
@@ -3769,14 +3783,14 @@ function closeAddStockModal() {
         }
 
         if (!d.ok) {
-          console.log("❌ 新增失敗:", d.error);
+          // debug log removed (was: console.log)
           hint.textContent = "❌ " + d.error;
           hint.className = "add-stock-hint error";
           btn.disabled = false;
           return;
         }
 
-        console.log("✅ 新增成功:", d.name, d.code);
+        // debug log removed (was: console.log)
         stockListData.push({ ticker: d.ticker, code: d.code, name: d.name });
         renderStockList();
         hint.textContent = "✅ 已加入 " + d.name + "（" + d.code + "）";
@@ -3805,6 +3819,17 @@ function closeAddStockModal() {
 // ══════════════════════════════════════════
 // 載入個股
 // ══════════════════════════════════════════
+// Fetch with timeout: the backend can cold-start, and without this the
+// loading spinner spins indefinitely with no feedback (audit P1).
+function fetchWithTimeout(url, options, ms) {
+  if (typeof AbortController === "undefined") return fetch(url, options);
+  var controller = new AbortController();
+  var timer = setTimeout(function() { controller.abort(); }, ms || 15000);
+  var opts = Object.assign({}, options || {}, { signal: controller.signal });
+  return fetch(url, opts).then(function(r) { clearTimeout(timer); return r; },
+    function(e) { clearTimeout(timer); throw e; });
+}
+
 function loadStock(code, days) {
   currentCode=code;
   if (days) currentDays=days;
@@ -3816,9 +3841,21 @@ function loadStock(code, days) {
   var activeEl=document.querySelector('.stock-item[data-code="'+code+'"]');
   if (activeEl) activeEl.classList.add("active");
 
-  fetch("/api/stock/"+code+"?days="+currentDays+"&strategy="+currentStrategy)
-
-    .then(function(r){ if(!r.ok) throw new Error("API error "+r.status); return r.json(); })
+  // Serve a fresh (<5 min) cached quote first; the API cold-start was the
+  // main cause of the long first-load spinner. The render pipeline below
+  // is unchanged, so cached and fresh data go through identical code.
+  var cacheKey = "stockCache:v1:"+code+":"+currentDays+":"+currentStrategy;
+  var cachedRaw = null;
+  try { cachedRaw = JSON.parse(sessionStorage.getItem(cacheKey) || "null"); } catch(e) { cachedRaw = null; }
+  var stockReq;
+  if (cachedRaw && cachedRaw.data && Date.now() - cachedRaw.ts < 300000) {
+    stockReq = Promise.resolve(cachedRaw.data);
+  } else {
+    stockReq = fetchWithTimeout("/api/stock/"+code+"?days="+currentDays+"&strategy="+currentStrategy, {}, 15000)
+      .then(function(r){ if(!r.ok) throw new Error("API error "+r.status); return r.json(); })
+      .then(function(data){ try { sessionStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data: data })); } catch(e) {} return data; });
+  }
+  stockReq
     .then(function(data){
       document.getElementById("chartTitle").textContent=data.name;
       document.getElementById("chartSub").textContent=data.code+".TW · TWSE";
@@ -3939,7 +3976,7 @@ function loadStock(code, days) {
     })
     .catch(function(e){
       try { clearRollingLowLine(); } catch(_){}
-      showToast("❌ 載入 "+code+" 失敗: "+e.message,"sell");
+      showToast("❌ 載入 "+code+" 失敗: "+(e.name==="AbortError" ? "逾時（後端可能正在喚醒），請再試一次" : e.message),"sell");
     })
     .finally(function(){ document.getElementById("loadingOverlay").style.display="none"; });
 }
@@ -7908,7 +7945,7 @@ function showTradeDetail() {
     localStorage.setItem("intradayMonitorEnabled", "1");
 
     showToast("✅ 盤中監控已自動啟動（每分鐘檢查）", "info");
-    console.log("[監控] 盤中監控已啟動");
+    // debug log removed (was: console.log)
 
     
   }
@@ -7929,7 +7966,7 @@ function showTradeDetail() {
     localStorage.removeItem("intradayMonitorEnabled");
 
     showToast("⏸ 已超出交易時段，監控自動停止", "info");
-    console.log("[監控] 盤中監控已自動停止");
+    // debug log removed (was: console.log)
 
     _scheduleNextCheck();
   }
@@ -7944,7 +7981,7 @@ function showTradeDetail() {
       if (isTradingHours()) {
         clearInterval(_waitForOpenInterval);
         _waitForOpenInterval = null;
-        console.log("[監控] 進入交易時段，自動啟動監控");
+        // debug log removed (was: console.log)
         _startMonitorIfNotRunning();
       }
     }, 60000);
@@ -7985,10 +8022,10 @@ function showTradeDetail() {
         if (enabled && isTradingHours()) {
           _startMonitorIfNotRunning();
         } else if (enabled) {
-          console.log("[監控] 後端已啟用，等待開盤自動輪詢...");
+          // debug log removed (was: console.log)
           _scheduleNextCheck();
         } else {
-          console.log("[監控] 後端已手動停用，盤中即時掃描將不執行");
+          // debug log removed (was: console.log)
         }
       })
       .catch(function(e) {

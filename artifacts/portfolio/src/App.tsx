@@ -136,7 +136,10 @@ function App() {
   useGlobalSetup();
   return (
     <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-      <Router />
+      <a href="#main-content" className="skip-link">跳至主要內容</a>
+      <div id="main-content" tabIndex={-1}>
+        <Router />
+      </div>
     </WouterRouter>
   );
 }

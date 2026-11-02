@@ -418,3 +418,32 @@
     inset: -1px;
   }
 }
+
+/* Skip link (audit P4): visually hidden until focused, then visible. */
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.skip-link:focus {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 10003;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background: #111922;
+  color: #e9f0ec;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(151, 190, 181, 0.4);
+}
+#main-content:focus {
+  outline: none;
+}
