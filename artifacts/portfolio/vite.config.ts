@@ -2,6 +2,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
+import { createHash } from "node:crypto";
+import fs from "node:fs";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 const rawPort = process.env.PORT;
@@ -26,12 +28,34 @@ if (!basePath) {
   );
 }
 
+// Content hash of the non-hashed public/ assets (styles + scripts injected
+// by BasePage). Unlike Date.now(), this only changes when an asset actually
+// changes, so visitors keep a valid cache across deploys that touch nothing.
+function publicAssetVersion(): string {
+  try {
+    const hash = createHash("sha256");
+    const walk = (dir: string) => {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory()) walk(full);
+        else if (entry.isFile()) hash.update(fs.readFileSync(full));
+      }
+    };
+    const root = path.resolve(import.meta.dirname, "public");
+    for (const sub of ["styles", "scripts"]) {
+      const dir = path.join(root, sub);
+      if (fs.existsSync(dir)) walk(dir);
+    }
+    return hash.digest("hex").slice(0, 10);
+  } catch {
+    return "1";
+  }
+}
+
 export default defineConfig({
   base: basePath,
   define: {
-    // Build-time identifier used to cache-bust non-hashed public/ assets
-    // (styles/scripts injected by BasePage). Changes on every build/deploy.
-    __ASSET_VERSION__: JSON.stringify(String(Date.now())),
+    __ASSET_VERSION__: JSON.stringify(publicAssetVersion()),
   },
   plugins: [
     react(),
@@ -62,6 +86,19 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        // Split the heaviest libraries out of the initial bundle so the
+        // first page load doesn't pay for chart / animation code that
+        // only some pages use. Vite still hashes these chunk filenames,
+        // so they can be cached long-term (see vercel.json headers).
+        manualChunks: {
+          react: ["react", "react-dom", "wouter"],
+          charts: ["recharts", "chart.js"],
+          motion: ["framer-motion"],
+        },
+      },
+    },
   },
   server: {
     port,

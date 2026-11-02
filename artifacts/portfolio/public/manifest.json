@@ -20,20 +20,23 @@
   "shortcuts": [
     {
       "name": "仙俠傳 RPG",
-      "url": "/games/xian/",
+      "url": "/xian-godot",
       "description": "回合制仙劍風格 RPG"
     },
     {
       "name": "蛋白質 AI",
-      "url": "/report.html",
+      "url": "/report",
       "description": "蛋白質 AI 專案報告"
     },
     {
       "name": "基因 AI 平台",
-      "url": "/gene_ai.html",
+      "url": "/gene-ai",
       "description": "序列分析與 CRISPR 設計"
     }
   ],
-  "categories": ["education", "utilities"],
+  "categories": [
+    "education",
+    "utilities"
+  ],
   "screenshots": []
 }

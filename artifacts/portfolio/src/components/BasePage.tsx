@@ -6,14 +6,59 @@ interface BasePageProps {
   pageStyles?: string[];
   pageScripts?: string[];
   html: string;
+  /** Page-specific description; falls back to the site description. */
+  description?: string;
 }
 
 // Cache-busting token for page-specific static assets under public/styles and
 // public/scripts (referenced by fixed, non-hashed URLs). Injected at build time
-// by Vite (see `define` in vite.config.ts) so it changes on every build/deploy
-// automatically — returning visitors never serve a stale cached copy.
+// by Vite (see `define` in vite.config.ts). It is now a hash of those asset
+// files' contents, so it only changes when an asset actually changes —
+// previously it was Date.now(), which invalidated every visitor's cache on
+// every deploy even when nothing had changed.
 declare const __ASSET_VERSION__: string;
 const ASSET_VERSION = typeof __ASSET_VERSION__ !== 'undefined' ? __ASSET_VERSION__ : 'dev';
+
+const SITE_URL = 'https://donttalk.vercel.app';
+const SITE_DESCRIPTION =
+  '電資工程與生物醫學雙碩士，整合蛋白質 AI 設計、基因分析、NGS 流程與互動平台開發的全端跨域工程師。';
+
+// Legacy underscore / .html URLs map to one hyphenated canonical URL, so
+// search engines don't treat /gene_ai, /gene-ai and /gene_ai.html as three
+// different pages.
+const CANONICAL_PATHS: Record<string, string> = {
+  '/about_me': '/about',
+  '/gene_ai': '/gene-ai',
+  '/protein_mpnn': '/protein-mpnn',
+  '/interview_prep': '/interview',
+  '/stem_cell': '/stem-cell',
+  '/video_gen': '/video-gen',
+};
+
+function canonicalPath(pathname: string): string {
+  const clean = pathname.replace(/\.html$/, '');
+  return CANONICAL_PATHS[clean] ?? (clean === '' ? '/' : clean);
+}
+
+function setMeta(attr: 'property' | 'name', key: string, content: string) {
+  let el = document.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.content = content;
+}
+
+function setCanonical(href: string) {
+  let el = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!el) {
+    el = document.createElement('link');
+    el.rel = 'canonical';
+    document.head.appendChild(el);
+  }
+  el.href = href;
+}
 
 function withVersion(url: string): string {
   if (/^https?:\/\//.test(url) || url.startsWith('//')) return url;
@@ -73,16 +118,28 @@ function runRenderShell() {
   }, 1000);
 }
 
-export default function BasePage({ title, bodyPage, pageStyles = [], pageScripts = [], html }: BasePageProps) {
+export default function BasePage({ title, bodyPage, pageStyles = [], pageScripts = [], html, description }: BasePageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const inlineScriptsRan = useRef(false);
 
-  // Update title + body page key + load/keep styles
+  // Update title + meta + canonical + body page key + page styles.
+  // Page styles are removed again when the page unmounts; previously they
+  // accumulated forever as the user navigated (more CSS on every page).
   useEffect(() => {
     document.title = title;
     document.body.dataset.page = bodyPage;
 
-    // Add page-specific styles (never removed — kept permanently to avoid flash)
+    const desc = description ?? SITE_DESCRIPTION;
+    const canonical = `${SITE_URL}${canonicalPath(window.location.pathname)}`;
+    setMeta('name', 'description', desc);
+    setMeta('property', 'og:title', title);
+    setMeta('property', 'og:description', desc);
+    setMeta('property', 'og:url', canonical);
+    setMeta('name', 'twitter:title', title);
+    setMeta('name', 'twitter:description', desc);
+    setCanonical(canonical);
+
+    const added: HTMLLinkElement[] = [];
     pageStyles.forEach(href => {
       const versioned = withVersion(href);
       if (!document.querySelector(`link[data-page-style="${versioned}"]`)) {
@@ -91,9 +148,13 @@ export default function BasePage({ title, bodyPage, pageStyles = [], pageScripts
         link.href = versioned;
         link.dataset.pageStyle = versioned;
         document.head.appendChild(link);
+        added.push(link);
       }
     });
-  }, [title, bodyPage, pageStyles.join(',')]);
+    return () => {
+      added.forEach(link => link.remove());
+    };
+  }, [title, bodyPage, pageStyles.join(','), description]);
 
   // Execute inline scripts and load external scripts
   useEffect(() => {

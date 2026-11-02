@@ -1,27 +1,35 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Switch, Route, Router as WouterRouter } from 'wouter';
+import { initWebVitals } from './lib/web-vitals';
 
-import IndexPage from './pages/index_page';
-import AboutPage from './pages/about';
-import WorksPage from './pages/works';
-import GeneAiPage from './pages/gene_ai';
-import NgsPage from './pages/ngs';
-import ProteinMpnnPage from './pages/protein_mpnn';
-import ReportPage from './pages/report';
-import ThesisPage from './pages/thesis';
-import InterviewPage from './pages/interview';
-import MusicPage from './pages/music';
-import VideoGenPage from './pages/video_gen';
-import XianGodotPage from './pages/xian_godot';
-import BlogPage from './pages/blog_page';
-import FirmwarePage from './pages/firmware';
-import StemCellPage from './pages/stem_cell';
-import InteractiveShowcasePage from './pages/interactive_showcase';
-import InterviewPrepPage from './pages/interview_prep';
-import StockPage from './pages/stock';
+// Route-level code splitting: each page is only downloaded when the user
+// navigates to it. Previously all 18 pages were statically imported, so the
+// first visit paid for every page (including recharts / chart-heavy pages).
+const IndexPage = lazy(() => import('./pages/index_page'));
+const AboutPage = lazy(() => import('./pages/about'));
+const WorksPage = lazy(() => import('./pages/works'));
+const GeneAiPage = lazy(() => import('./pages/gene_ai'));
+const NgsPage = lazy(() => import('./pages/ngs'));
+const ProteinMpnnPage = lazy(() => import('./pages/protein_mpnn'));
+const ReportPage = lazy(() => import('./pages/report'));
+const ThesisPage = lazy(() => import('./pages/thesis'));
+const InterviewPage = lazy(() => import('./pages/interview'));
+const MusicPage = lazy(() => import('./pages/music'));
+const VideoGenPage = lazy(() => import('./pages/video_gen'));
+const XianGodotPage = lazy(() => import('./pages/xian_godot'));
+const BlogPage = lazy(() => import('./pages/blog_page'));
+const FirmwarePage = lazy(() => import('./pages/firmware'));
+const StemCellPage = lazy(() => import('./pages/stem_cell'));
+const InteractiveShowcasePage = lazy(() => import('./pages/interactive_showcase'));
+const InterviewPrepPage = lazy(() => import('./pages/interview_prep'));
+const StockPage = lazy(() => import('./pages/stock'));
 
+// Inter is already loaded from index.html (400/500/600/700). Only the mono
+// font actually used by the stylesheets is loaded here. The previous URL
+// also pulled Source Serif 4 and Space Grotesk in many weights, neither of
+// which is referenced by any stylesheet, plus a second copy of Inter.
 const SHARED_STYLES = [
-  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Space+Grotesk:wght@400;500;600;700&display=swap',
+  'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap',
   '/styles/shared.css',
   '/styles/polish.css',
   '/styles/dynamic.css',
@@ -35,6 +43,7 @@ const SHARED_SCRIPTS = [
 
 function useGlobalSetup() {
   useEffect(() => {
+    initWebVitals();
     document.documentElement.classList.add('js-reveal');
     if ('serviceWorker' in navigator) {
       if (import.meta.env.PROD) {
@@ -89,34 +98,39 @@ function NotFoundPage() {
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={IndexPage} />
-      <Route path="/about" component={AboutPage} />
-      <Route path="/about_me" component={AboutPage} />
-      <Route path="/works" component={WorksPage} />
-      <Route path="/gene-ai" component={GeneAiPage} />
-      <Route path="/gene_ai" component={GeneAiPage} />
-      <Route path="/ngs" component={NgsPage} />
-      <Route path="/protein-mpnn" component={ProteinMpnnPage} />
-      <Route path="/protein_mpnn" component={ProteinMpnnPage} />
-      <Route path="/report" component={ReportPage} />
-      <Route path="/thesis" component={ThesisPage} />
-      <Route path="/interview" component={InterviewPage} />
-      <Route path="/interview_prep" component={InterviewPage} />
-      <Route path="/interview-prep" component={InterviewPrepPage} />
-      <Route path="/firmware" component={FirmwarePage} />
-      <Route path="/stem-cell" component={StemCellPage} />
-      <Route path="/stem_cell" component={StemCellPage} />
-      <Route path="/interactive-showcase" component={InteractiveShowcasePage} />
-      <Route path="/music" component={MusicPage} />
-      <Route path="/video-gen" component={VideoGenPage} />
-      <Route path="/video_gen" component={VideoGenPage} />
-      <Route path="/xian-godot" component={XianGodotPage} />
-      <Route path="/stock" component={StockPage} />
-      <Route path="/blog" component={BlogPage} />
-      <Route path="/blog/:slug+" component={BlogPage} />
-      <Route component={NotFoundPage} />
-    </Switch>
+    <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>載入中…</div>}>
+      <Switch>
+        <Route path="/" component={IndexPage} />
+        <Route path="/about" component={AboutPage} />
+        {/* Legacy underscore URLs are kept as a fallback for local dev /
+            direct file serving; on Vercel, vercel.json redirects them to
+            the hyphenated canonical URL before the SPA rewrite runs. */}
+        <Route path="/about_me" component={AboutPage} />
+        <Route path="/works" component={WorksPage} />
+        <Route path="/gene-ai" component={GeneAiPage} />
+        <Route path="/gene_ai" component={GeneAiPage} />
+        <Route path="/ngs" component={NgsPage} />
+        <Route path="/protein-mpnn" component={ProteinMpnnPage} />
+        <Route path="/protein_mpnn" component={ProteinMpnnPage} />
+        <Route path="/report" component={ReportPage} />
+        <Route path="/thesis" component={ThesisPage} />
+        <Route path="/interview" component={InterviewPage} />
+        <Route path="/interview_prep" component={InterviewPage} />
+        <Route path="/interview-prep" component={InterviewPrepPage} />
+        <Route path="/firmware" component={FirmwarePage} />
+        <Route path="/stem-cell" component={StemCellPage} />
+        <Route path="/stem_cell" component={StemCellPage} />
+        <Route path="/interactive-showcase" component={InteractiveShowcasePage} />
+        <Route path="/music" component={MusicPage} />
+        <Route path="/video-gen" component={VideoGenPage} />
+        <Route path="/video_gen" component={VideoGenPage} />
+        <Route path="/xian-godot" component={XianGodotPage} />
+        <Route path="/stock" component={StockPage} />
+        <Route path="/blog" component={BlogPage} />
+        <Route path="/blog/:slug+" component={BlogPage} />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </Suspense>
   );
 }
 

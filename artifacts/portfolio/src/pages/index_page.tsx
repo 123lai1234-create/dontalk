@@ -185,7 +185,8 @@ const HTML = `
 export default function IndexPage() {
   return (
     <BasePage
-      title="Portfolio — 工程 × 生醫 × AI 平台"
+      title="不說樂園 — 工程 × 生醫 × AI 作品集"
+      description="電資工程與生物醫學雙碩士，整合蛋白質 AI 設計、基因分析、NGS 流程與互動平台開發的全端跨域工程師。"
       bodyPage="index"
       pageStyles={['/styles/index.css', '/styles/index-live.css', '/styles/index-content.css']}
       pageScripts={['/scripts/chart.umd.js', '/scripts/app-config.js', '/scripts/index-ui.js', '/scripts/index-live.js', '/scripts/index-charts.js']}

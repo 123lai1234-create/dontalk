@@ -561,7 +561,7 @@ function initMicroInteractions() {
         skToggle.textContent = '已載入';
         if (skDemo) {
           skDemo.innerHTML = `
-            <img src="https://picsum.photos/seed/sk1/48/48" style="width:48px;height:48px;border-radius:50%;object-fit:cover" alt="">
+            <img src="/favicon.svg" style="width:48px;height:48px;border-radius:50%;object-fit:cover" alt="">
             <div style="display:flex;flex-direction:column;gap:6px;flex:1">
               <p style="font-size:0.88rem;font-weight:600">JT Lai</p>
               <p style="font-size:0.78rem;color:var(--muted)">生醫工程師 · AI 研究員</p>

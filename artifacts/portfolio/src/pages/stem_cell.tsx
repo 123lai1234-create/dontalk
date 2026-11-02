@@ -262,7 +262,7 @@ const HTML = `
             <!-- Lightbox -->
             <div class="sc-lightbox" id="scLightbox">
                 <button class="sc-lb-close" id="scLbClose">×</button>
-                <div class="sc-lb-img-wrap"><img id="scLbImg" src="" alt=""></div>
+                <div class="sc-lb-img-wrap"><img id="scLbImg" src="" alt="幹細胞免疫螢光圖放大檢視"></div>
                 <div class="sc-lb-caption" id="scLbCaption"></div>
                 <div class="sc-lb-nav">
                     <button class="sc-lb-btn" id="scLbPrev">‹ 上一張</button>
@@ -560,15 +560,15 @@ const HTML = `
     // ── IF Gallery ─────────────────────────────────────────────
     const IF_DATA = {
         integrin: [
-            { label: '0 ng/mL ang · 50k', channels: ['#4a9eff','#ff8392'], stain: 'DAPI · CD31(488)', src: '/stem-cell/if_ang0_50k_cd31.png' },
-            { label: '0 ng/mL ang · 100k', channels: ['#4a9eff','#ff8392'], stain: 'DAPI · CD31(488) 100×', src: '/stem-cell/if_ang0_100k_cd31.png' },
-            { label: '0 ng/mL ang · 100k', channels: ['#4a9eff'], stain: 'DAPI 100×', src: '/stem-cell/if_ang0_100k_dapi.png' },
-            { label: '1 ng/mL ang · 50k', channels: ['#4a9eff','#7bf0be','#ff8392'], stain: 'DAPI · Nestin(488) · CD144(555) 100×', src: '/stem-cell/if_ang1_50k_nestin.png' },
-            { label: '1 ng/mL ang · 100k', channels: ['#4a9eff','#7bf0be','#ff8392'], stain: 'DAPI · Nestin(488) · CD144(555) 100×', src: '/stem-cell/if_ang1_100k_nestin.png' },
-            { label: '1 ng/mL ang · 250k', channels: ['#4a9eff','#7bf0be','#ff8392'], stain: 'DAPI · Nestin(488) · CD144(555) 100×', src: '/stem-cell/if_ang1_250k_nestin.png' },
-            { label: '10 ng/mL ang · 50k', channels: ['#4a9eff','#7bf0be','#ff8392'], stain: 'DAPI · Nestin(488) · CD144(555) 100×', src: '/stem-cell/if_ang10_50k_nestin.png' },
-            { label: '10 ng/mL ang · 100k', channels: ['#4a9eff','#ff8392'], stain: 'DAPI · CD31(488) 100×', src: '/stem-cell/if_ang10_100k_cd31.png' },
-            { label: '10 ng/mL ang · 250k', channels: ['#4a9eff','#7bf0be','#ff8392'], stain: 'DAPI · Nestin(488) · CD144(555) 100×', src: '/stem-cell/if_ang10_250k_nestin.png' },
+            { label: '0 ng/mL ang · 50k', channels: ['#4a9eff','#ff8392'], stain: 'DAPI · CD31(488)', src: '/stem-cell/if_ang0_50k_cd31.webp' },
+            { label: '0 ng/mL ang · 100k', channels: ['#4a9eff','#ff8392'], stain: 'DAPI · CD31(488) 100×', src: '/stem-cell/if_ang0_100k_cd31.webp' },
+            { label: '0 ng/mL ang · 100k', channels: ['#4a9eff'], stain: 'DAPI 100×', src: '/stem-cell/if_ang0_100k_dapi.webp' },
+            { label: '1 ng/mL ang · 50k', channels: ['#4a9eff','#7bf0be','#ff8392'], stain: 'DAPI · Nestin(488) · CD144(555) 100×', src: '/stem-cell/if_ang1_50k_nestin.webp' },
+            { label: '1 ng/mL ang · 100k', channels: ['#4a9eff','#7bf0be','#ff8392'], stain: 'DAPI · Nestin(488) · CD144(555) 100×', src: '/stem-cell/if_ang1_100k_nestin.webp' },
+            { label: '1 ng/mL ang · 250k', channels: ['#4a9eff','#7bf0be','#ff8392'], stain: 'DAPI · Nestin(488) · CD144(555) 100×', src: '/stem-cell/if_ang1_250k_nestin.webp' },
+            { label: '10 ng/mL ang · 50k', channels: ['#4a9eff','#7bf0be','#ff8392'], stain: 'DAPI · Nestin(488) · CD144(555) 100×', src: '/stem-cell/if_ang10_50k_nestin.webp' },
+            { label: '10 ng/mL ang · 100k', channels: ['#4a9eff','#ff8392'], stain: 'DAPI · CD31(488) 100×', src: '/stem-cell/if_ang10_100k_cd31.webp' },
+            { label: '10 ng/mL ang · 250k', channels: ['#4a9eff','#7bf0be','#ff8392'], stain: 'DAPI · Nestin(488) · CD144(555) 100×', src: '/stem-cell/if_ang10_250k_nestin.webp' },
         ],
         atms: [
             { label: 'Control · 5 hrs', channels: ['#4a9eff','#7bf0be','#ff8392'], stain: 'DAPI · GFAP · CD144', src: '' },
@@ -613,7 +613,7 @@ const HTML = `
     function showLbItem() {
         const item = lbItems[lbIdx];
         const img = document.getElementById('scLbImg');
-        if (item.src) { img.src = item.src; img.style.display = ''; }
+        if (item.src) { img.src = item.src; img.alt = item.label + '　' + item.stain; img.style.display = ''; }
         else { img.style.display = 'none'; }
         document.getElementById('scLbCaption').textContent = item.label + '　' + item.stain;
     }

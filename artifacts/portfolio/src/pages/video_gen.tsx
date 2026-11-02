@@ -4,10 +4,10 @@ import BasePage from '../components/BasePage';
 const HTML = `\r
     <!-- 背景影片 -->\r
     <div class="video-bg-wrapper">\r
-        <video id="bgVideo" autoplay muted loop playsinline>\r
+        <video id="bgVideo" muted loop playsinline preload="none" poster="/waiting-bg-poster.jpg">\r
             <source src="/waiting-bg.mp4" type="video/mp4">\r
         </video>\r
-        <div class="video-bg-overlay"></div>\r
+        <div class="video-bg-overlay"></div>\r\n        <script>(function(){var v=document.getElementById("bgVideo");if(!v)return;if(window.matchMedia("(max-width: 768px)").matches||(navigator.connection&&navigator.connection.saveData))return;v.preload="auto";v.play&&v.play().catch(function(){});})();</script>\r
     </div>\r
     <div data-site-nav></div>\r
     <header class="hero">\r

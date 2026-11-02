@@ -5,7 +5,7 @@ const HTML = `
     <div class="game-frame-wrap">
       <iframe
         id="game-frame"
-        src="/games/xian-godot/"
+        data-src="/games/xian-godot/"
         title="仙境傳說"
         allowfullscreen
         loading="lazy"
@@ -14,6 +14,7 @@ const HTML = `
         <button id="play-btn" aria-label="開始遊戲">▶ 點擊開始</button>
       </div>
     </div>
+    <p class="touch-note">手機提醒：此遊戲需要實體鍵盤操作，觸控裝置請接上鍵盤或改用電腦開啟。</p>
     <div class="controls">
       <span>↑↓←→ 移動</span>
       <span>Z / Enter 確認</span>
@@ -43,6 +44,7 @@ const STYLES = `
     transition: opacity 0.3s;
   }
   .overlay.hidden { opacity: 0; pointer-events: none; }
+  .touch-note { color: #d8c48a; font-size: 0.82rem; text-align: center; margin: 0; }
   #play-btn {
     padding: 0.7rem 2rem; font-size: 1.1rem;
     background: #7a5c1e; color: #ffd700; border: none;
@@ -74,6 +76,8 @@ export default function XianGodotPage() {
 
     if (playBtn && overlay) {
       playBtn.addEventListener('click', () => {
+        // Defer the 35MB Godot/WASM game until the user actually starts it.
+        if (frame && !frame.getAttribute('src')) frame.src = frame.dataset.src || '';
         overlay.classList.add('hidden');
         if (frame) frame.focus();
       });

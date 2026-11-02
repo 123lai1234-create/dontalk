@@ -1,28 +1,163 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "pnpm install --no-frozen-lockfile",
-  "buildCommand": "pnpm --filter @workspace/portfolio run build",
-  "outputDirectory": "artifacts/portfolio/dist/public",
-  "trailingSlash": false,
   "build": {
     "env": {
-      "PORT": "3000",
-      "BASE_PATH": "/"
+      "BASE_PATH": "/",
+      "PORT": "3000"
     }
   },
+  "buildCommand": "pnpm --filter @workspace/portfolio run build",
+  "headers": [
+    {
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' https://api-server-production-676d.up.railway.app https://*.up.railway.app wss:; frame-src 'self' https://www.youtube.com https://huggingface.co; font-src 'self' https://fonts.gstatic.com; object-src 'none'; base-uri 'self'"
+        }
+      ],
+      "source": "/(.*)"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ],
+      "source": "/index.html"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ],
+      "source": "/assets/(.*)"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ],
+      "source": "/(styles|scripts)/(.*)"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=86400"
+        }
+      ],
+      "source": "/(games|stem-cell|stock-app|music|f1)/(.*)"
+    }
+  ],
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "outputDirectory": "artifacts/portfolio/dist/public",
+  "redirects": [
+    {
+      "destination": "/about",
+      "permanent": true,
+      "source": "/about_me"
+    },
+    {
+      "destination": "/gene-ai",
+      "permanent": true,
+      "source": "/gene_ai"
+    },
+    {
+      "destination": "/protein-mpnn",
+      "permanent": true,
+      "source": "/protein_mpnn"
+    },
+    {
+      "destination": "/interview",
+      "permanent": true,
+      "source": "/interview_prep"
+    },
+    {
+      "destination": "/stem-cell",
+      "permanent": true,
+      "source": "/stem_cell"
+    },
+    {
+      "destination": "/video-gen",
+      "permanent": true,
+      "source": "/video_gen"
+    },
+    {
+      "destination": "/about",
+      "permanent": true,
+      "source": "/about_me.html"
+    },
+    {
+      "destination": "/works",
+      "permanent": true,
+      "source": "/works.html"
+    },
+    {
+      "destination": "/thesis",
+      "permanent": true,
+      "source": "/thesis.html"
+    },
+    {
+      "destination": "/gene-ai",
+      "permanent": true,
+      "source": "/gene_ai.html"
+    },
+    {
+      "destination": "/protein-mpnn",
+      "permanent": true,
+      "source": "/protein_mpnn.html"
+    },
+    {
+      "destination": "/ngs",
+      "permanent": true,
+      "source": "/ngs.html"
+    },
+    {
+      "destination": "/firmware",
+      "permanent": true,
+      "source": "/firmware.html"
+    },
+    {
+      "destination": "/interview",
+      "permanent": true,
+      "source": "/interview_prep.html"
+    }
+  ],
   "rewrites": [
     {
       "_comment": "API proxy → Railway-hosted api-server. Domain api-server-production-676d.up.railway.app is the public URL auto-assigned by Railway to the production service. The previous Replit Reserved VM (ddd-8888uhiuh.replit.app) was deprecated by Replit and is now offline — see Dockerfile + railway.toml + artifacts/api-server/.env.example for the new deployment.",
-      "source": "/api/:path*",
-      "destination": "https://api-server-production-676d.up.railway.app/api/:path*"
+      "destination": "https://api-server-production-676d.up.railway.app/api/:path*",
+      "source": "/api/:path*"
     },
     {
-      "source": "/f1/:path*",
-      "destination": "/f1/index.html"
+      "destination": "/f1/index.html",
+      "source": "/f1/:path*"
     },
     {
-      "source": "/:path*",
-      "destination": "/index.html"
+      "destination": "/index.html",
+      "source": "/:path*"
     }
-  ]
+  ],
+  "trailingSlash": false
 }

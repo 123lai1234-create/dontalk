@@ -400,17 +400,17 @@ const HTML = `
     <div class="lazy-images-row">
       <p class="demo-hint">↓ 懶加載圖片（以 Intersection Observer 偵測）</p>
       <div class="lazy-grid">
-        <div class="lazy-img-wrapper io-lazy" data-src="https://picsum.photos/seed/dna1/400/240">
+        <div class="lazy-img-wrapper io-lazy" data-src="/og-image.svg">
           <div class="lazy-placeholder"><div class="sk-shimmer"></div></div>
-          <img class="lazy-img" alt="隨機圖 1">
+          <img class="lazy-img" alt="展示用示意圖 1">
         </div>
-        <div class="lazy-img-wrapper io-lazy" data-src="https://picsum.photos/seed/bio2/400/240">
+        <div class="lazy-img-wrapper io-lazy" data-src="/og-image.svg">
           <div class="lazy-placeholder"><div class="sk-shimmer"></div></div>
-          <img class="lazy-img" alt="隨機圖 2">
+          <img class="lazy-img" alt="展示用示意圖 2">
         </div>
-        <div class="lazy-img-wrapper io-lazy" data-src="https://picsum.photos/seed/ai3/400/240">
+        <div class="lazy-img-wrapper io-lazy" data-src="/og-image.svg">
           <div class="lazy-placeholder"><div class="sk-shimmer"></div></div>
-          <img class="lazy-img" alt="隨機圖 3">
+          <img class="lazy-img" alt="展示用示意圖 3">
         </div>
       </div>
     </div>

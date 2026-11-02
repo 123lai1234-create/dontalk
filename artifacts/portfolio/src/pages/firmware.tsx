@@ -354,7 +354,7 @@ const HTML = `
                 </p>
             </div>
             <div class="fw-yt" style="margin-bottom:16px">
-                <iframe src="https://www.youtube.com/embed/EvhITMTTl48?list=PLUl_fzAL8tWIqU_zk0u1_18sf1LF-ym91" title="MIT 6.004 Lecture 13 — Finite State Machines" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/EvhITMTTl48?list=PLUl_fzAL8tWIqU_zk0u1_18sf1LF-ym91" title="MIT 6.004 Lecture 13 — Finite State Machines" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
             <div class="fw-pipe" style="margin-top:16px">
                 <div class="fw-step"><div class="t">數位邏輯 → GPIO</div><div class="d">組合邏輯閘映射到 Nano130 的 PA/PB multifunction 腳位設定</div></div>
@@ -368,7 +368,7 @@ const HTML = `
         <section class="fw-section">
             <div class="fw-section-head"><span class="fw-section-num">10</span><h2>完整韌體教學播放清單</h2><span class="note">YouTube · Nano MCU series</span></div>
             <div class="fw-yt">
-                <iframe src="https://www.youtube.com/embed/videoseries?list=PLUl_fzAL8tWIqU_zk0u1_18sf1LF-ym91" title="Nuvoton Firmware Playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/videoseries?list=PLUl_fzAL8tWIqU_zk0u1_18sf1LF-ym91" title="Nuvoton Firmware Playlist" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
 

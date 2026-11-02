@@ -11,6 +11,7 @@ function StockPage() {
     <iframe
       src={src}
       title="台股均線買賣訊號系統"
+      loading="lazy"
       style={{
         position: 'fixed',
         inset: 0,

@@ -77,7 +77,14 @@
         const candidates = deriveApiCandidates(options);
         for (const candidate of candidates) {
             try {
-                const response = await fetch(`${candidate}/api/healthz`);
+                const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+                const timeout = controller ? setTimeout(() => controller.abort(), 5000) : null;
+                let response;
+                try {
+                    response = await fetch(`${candidate}/api/healthz`, controller ? { signal: controller.signal } : undefined);
+                } finally {
+                    if (timeout) clearTimeout(timeout);
+                }
                 if (!response.ok) {
                     continue;
                 }

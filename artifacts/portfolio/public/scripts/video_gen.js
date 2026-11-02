@@ -63,7 +63,8 @@
     };
     const init = async () => {
         const api = await window.APP_CONFIG_UTILS?.resolveApiBase?.() || window.APP_CONFIG?.API_BASE_URL || '';
-        const lbl = $('videoApiLabel'); if (lbl) lbl.textContent = api || 'detecting...';
+        const lbl = $('videoApiLabel'); if (lbl) lbl.textContent = api || '無法連線';
+        if (!api) { setStatus('後端 API 目前無法連線，請稍後再試（已嘗試所有候選位址）。', 'error'); }
         $('videoGenBtn')?.addEventListener('click', () => generate(api));
         document.querySelectorAll('[data-example-prompt]').forEach(b =>
             b.addEventListener('click', () => { const el = $('videoPrompt'); if (el) { el.value = b.dataset.examplePrompt; el.focus(); } })
