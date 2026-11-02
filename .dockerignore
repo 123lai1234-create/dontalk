@@ -11,8 +11,6 @@ artifacts/**/dist
 artifacts/**/.vite
 artifacts/**/.cache
 artifacts/portfolio/public
-artifacts/portfolio-mobile/**
-artifacts/mockup-sandbox/**
 
 # Tests / coverage / scratch
 coverage
@@ -20,7 +18,6 @@ coverage
 **/*.spec.ts
 **/__tests__
 .attic
-attached_assets
 tmp
 
 # Local state, secrets, env files
@@ -46,8 +43,6 @@ tmp
 .replitignore
 .replit.nix
 .vercel
-attached_assets
-attic
 
 # OS noise
 .DS_Store
