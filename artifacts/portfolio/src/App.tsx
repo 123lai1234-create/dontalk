@@ -16,7 +16,6 @@ const ThesisPage = lazy(() => import('./pages/thesis'));
 const InterviewPage = lazy(() => import('./pages/interview'));
 const MusicPage = lazy(() => import('./pages/music'));
 const VideoGenPage = lazy(() => import('./pages/video_gen'));
-const XianGodotPage = lazy(() => import('./pages/xian_godot'));
 const BlogPage = lazy(() => import('./pages/blog_page'));
 const FirmwarePage = lazy(() => import('./pages/firmware'));
 const StemCellPage = lazy(() => import('./pages/stem_cell'));
@@ -124,7 +123,6 @@ function Router() {
         <Route path="/music" component={MusicPage} />
         <Route path="/video-gen" component={VideoGenPage} />
         <Route path="/video_gen" component={VideoGenPage} />
-        <Route path="/xian-godot" component={XianGodotPage} />
         <Route path="/stock" component={StockPage} />
         <Route path="/blog" component={BlogPage} />
         <Route path="/blog/:slug+" component={BlogPage} />

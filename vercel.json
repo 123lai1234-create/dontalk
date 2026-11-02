@@ -67,7 +67,7 @@
           "value": "public, max-age=604800, stale-while-revalidate=86400"
         }
       ],
-      "source": "/(games|stem-cell|stock-app|music|f1)/(.*)"
+      "source": "/(stem-cell|stock-app|music|f1)/(.*)"
     }
   ],
   "installCommand": "pnpm install --no-frozen-lockfile",
